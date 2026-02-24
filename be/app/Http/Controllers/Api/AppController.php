@@ -75,8 +75,8 @@ class AppController extends ApiController
         return $this->successResponse([
             'user'=>$user,
             'jumlah_saku'=>$sakus->count(),
-            'total_pemasukan_bulan_ini'=>$summary['total_pemasukan'],
-            'total_pengeluaran_bulan_ini'=>$summary['total_pengeluaran'],
+            'total_pemasukan_bulan_ini'=>@$summary['total_pemasukan']??0,
+            'total_pengeluaran_bulan_ini'=>@$summary['total_pengeluaran']??0,
         ]);
     }
     public function me(){
