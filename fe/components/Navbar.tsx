@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { api } from "../services/api";
 import { getToken } from "../utils/auth";
+import { useLayout } from "./layouts/LayoutContext";
 interface User {
   name: string;
   email?: string;
@@ -32,12 +33,14 @@ const Navbar: React.FC = () => {
 
   const handleMenuToggle = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    document.documentElement.classList.toggle('layout-menu-expanded');
     // TODO: toggle sidebar (body class / state / context)
   };
 
   const handleThemeToggle = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     // TODO: buka dropdown theme (jika tidak pakai bootstrap JS)
+    document.documentElement.classList.toggle('layout-menu-expanded');
   };
 
   return (
@@ -52,7 +55,7 @@ const Navbar: React.FC = () => {
           onClick={handleMenuToggle}
           className="nav-item nav-link px-0 me-xl-6"
         >
-          <i className="icon-base ti tabler-menu-2 icon-md"></i>
+          <i className="icon-base ti tabler-menu-2 icon-md">xx</i>
         </a>
       </div>
 
@@ -70,7 +73,7 @@ const Navbar: React.FC = () => {
               className="nav-link dropdown-toggle hide-arrow"
               data-bs-toggle="dropdown"
             >
-              <i className="icon-base ti tabler-sun icon-md theme-icon-active"></i>
+              <i className="icon-base ti tabler-sun icon-md theme-icon-active">xx</i>
               <span className="d-none ms-2" id="nav-theme-text">
                 Toggle theme
               </span>

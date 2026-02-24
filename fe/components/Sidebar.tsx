@@ -1,91 +1,72 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useLayout } from "./layouts/LayoutContext";
 
 const Sidebar: React.FC = () => {
   const location = useLocation();
   const currentPath = location.pathname;
 
+  const [isOpen, setIsOpen] = useState(true);          // desktop
+
   const handleToggle = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    // TODO: tambahkan logic toggle sidebar (class body / state / context)
+    setIsOpen(prev => !prev);
+    document.documentElement.classList.toggle('layout-menu-expanded');
   };
+
 
   const isActive = (path: string) => currentPath === path;
 
   return (
     <>
-      <aside id="layout-menu" className="layout-menu menu-vertical menu">
-        <div className="app-brand demo">
-          <a href="/" className="app-brand-link">
-            <span className="app-brand-logo demo">
-              <span className="text-primary">
-                {/* Logo SVG */}
-                <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  {/* paths */}
-                </svg>
-              </span>
-            </span>
-            <span className="app-brand-text demo menu-text fw-bold ms-3">
-              KEUANGAN
-            </span>
-          </a>
-
-          <a
-            href="#"
+      {/* SIDEBAR */}
+      <aside
+        id="layout-menu"
+        className={`layout-menu menu-vertical menu
+          ${isOpen ? "" : "collapsed"}
+        `}
+      >
+        <div className="app-brand">
+          <Link to="/" className="app-brand-link">
+            <span className="app-brand-text fw-bold">SAKU</span>
+          </Link>
+          {/* Toggle desktop */}
+          <button
             onClick={handleToggle}
-            className="layout-menu-toggle menu-link text-large ms-auto"
+            className="layout-menu-toggle d-none d-xl-flex"
           >
-            <i className="icon-base ti menu-toggle-icon d-none d-xl-block"></i>
-            <i className="icon-base ti tabler-x d-block d-xl-none"></i>
-          </a>
+            ☰
+          </button>
         </div>
 
-        <div className="menu-inner-shadow"></div>
-
-        <ul className="menu-inner py-1">
+        <ul className="menu-inner">
           <li className={`menu-item ${isActive("/") ? "active" : ""}`}>
-            <a href="/" className="menu-link">
-              <i className="menu-icon icon-base ti tabler-smart-home"></i>
-              <div>Dashboard</div>
-            </a>
+            <Link to="/" className="menu-link">Dashboard</Link>
           </li>
+
           <li className={`menu-item ${isActive("/transaksi") ? "active" : ""}`}>
-            <a href="/transaksi" className="menu-link">
-              <i className="menu-icon icon-base ti tabler-smart-home"></i>
-              <div>Transaksi Saya</div>
-            </a>
+            <Link to="/transaksi" className="menu-link">Transaksi Saya</Link>
           </li>
+
           <li className={`menu-item ${isActive("/laporan/bulanan") ? "active" : ""}`}>
-            <a href="/laporan/bulanan" className="menu-link">
-              <i className="menu-icon icon-base ti tabler-report"></i>
-              <div>Laporan Bulanan</div>
-            </a>
+            <Link to="/laporan/bulanan" className="menu-link">Laporan Bulanan</Link>
           </li>
+
           <li className={`menu-item ${isActive("/pengaturan/saku") ? "active" : ""}`}>
-            <a href="/pengaturan/saku" className="menu-link">
-              <i className="menu-icon icon-base ti tabler-app-window"></i>
-              <div>Saku</div>
-            </a>
+            <Link to="/pengaturan/saku" className="menu-link">Saku</Link>
           </li>
 
           <li className={`menu-item ${isActive("/pengaturan/kategori") ? "active" : ""}`}>
-            <a href="/pengaturan/kategori" className="menu-link">
-              <i className="menu-icon icon-base ti tabler-app-window"></i>
-              <div>Kategori</div>
-            </a>
+            <Link to="/pengaturan/kategori" className="menu-link">Kategori</Link>
           </li>
         </ul>
       </aside>
 
-      {/* Mobile Toggler */}
-      <div className="menu-mobile-toggler d-xl-none rounded-1">
-        <a
-          href="#"
-          onClick={handleToggle}
-          className="layout-menu-toggle menu-link text-large text-bg-secondary p-2 rounded-1"
-        >
-          <i className="ti tabler-menu icon-base"></i>
-          <i className="ti tabler-chevron-right icon-base"></i>
+    
+      {/* HAMBURGER MOBILE */}
+      <div className="menu-mobile-toggler d-xl-none">
+        <a href="#"  onClick={handleToggle} className="menu-hamburger">
+          ☰z
         </a>
       </div>
     </>
