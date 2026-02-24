@@ -54,7 +54,17 @@
     <script src="{{ asset('assets/js/config.js') }}"></script>
 
     @stack('page-style')
-</head>
+
+    <style>
+      @media (max-width: 1199px) {
+  html.layout-menu-expanded .layout-menu-toggle {
+    display: flex !important;
+    position: relative;
+    z-index: 3000;
+  }
+}
+    </style>
+</head> 
 
 <body>
     @yield("content")
