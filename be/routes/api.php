@@ -4,13 +4,13 @@ use App\Http\Controllers\Api\AppController;
 use App\Http\Controllers\PengaturanSakuController;
 use App\Http\Controllers\PengaturanKategoriController;
 use App\Http\Controllers\TrxKeuanganController;
+use App\Models\Kategori;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return response()->json(["message" => "API Keuangan"]);
 });
-
 Route::post('/login', [AppController::class, "login"]);
 Route::get('/logout', [AppController::class, "logout"]);
 Route::get("/test",function(){
