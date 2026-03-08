@@ -1,2 +1,3 @@
 *:Zone.Identifier
 starter-kit/*
+be/.env.prod
